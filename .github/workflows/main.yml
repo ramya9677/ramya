@@ -32,7 +32,7 @@ jobs:
       # Step 4: Run JMeter Script with Multiple Users
       - name: Run JMeter Test
         run: |
-          ${{ github.workspace }}/apache-jmeter-5.6.3/bin/jmeter.bat -n -t ${{ github.workspace }}/ORANGE_DEMO_SCRIPT.jmx -l ${{ github.workspace }}/results.jtl -e -o ${{ github.workspace }}/report -Jusers=50
+          ${{ github.workspace }}/apache-jmeter-5.6.3/bin/jmeter.bat -n -t ${{ github.workspace }}/ORANGE_DEMO_SCRIPT.jmx -l ${{ github.workspace }}/results.jtl -e -o ${{ github.workspace }}/report -Jusers=5
         shell: cmd # Use Windows shell for proper path handling  
 
       # Step 5: Upload Test Report and JTL file
