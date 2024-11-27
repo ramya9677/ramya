@@ -1,4 +1,4 @@
-name: Run JMeter Test on Windows 1
+name: Run JMeter Test on Windows
 
 on:
   push:
@@ -22,16 +22,17 @@ jobs:
           java-version: '8'
           distribution: 'zulu' # Java distribution compatible with GitHub runners
 
-     # Step 3: Download and Install Apache JMeter 5.6.3
+      # Step 3: Download and Install Apache JMeter 5.6.3
       - name: Download Apache JMeter
         run: |
           curl -o apache-jmeter-5.6.3.zip https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.6.3.zip
           tar -xf apache-jmeter-5.6.3.zip
           echo "JMeter installed in $PWD/apache-jmeter-5.6.3"
-      # Step 4: Run JMeter Script
+
+      # Step 4: Run JMeter Script with Multiple Users
       - name: Run JMeter Test
         run: |
-          ${{ github.workspace }}/apache-jmeter-5.6.3/bin/jmeter.bat -n -t ${{ github.workspace }}/php_test.jmx -l ${{ github.workspace }}/results.jtl -e -o ${{ github.workspace }}/report
+          ${{ github.workspace }}/apache-jmeter-5.6.3/bin/jmeter.bat -n -t ${{ github.workspace }}/ORANGE_DEMO_SCRIPT.jmx -l ${{ github.workspace }}/results.jtl -e -o ${{ github.workspace }}/report -Jusers=50
         shell: cmd # Use Windows shell for proper path handling  
 
       # Step 5: Upload Test Report and JTL file
@@ -40,3 +41,4 @@ jobs:
         with:
           name: jmeter-report
           path: ${{ github.workspace }}/report
+
